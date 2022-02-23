@@ -61,7 +61,8 @@ const shortenAddress = (str) => {
   }, [hasClaimedNFT]);
 
 // This useEffect grabs the # of token each member holds.
-useEffect(async () => {
+useEffect(() => {
+  async function fetchData() {
   if (!hasClaimedNFT) {
     return;
   }
@@ -74,6 +75,8 @@ useEffect(async () => {
   } catch (error) {
     console.error("failed to get token amounts", error);
   }
+}
+fetchData();
 }, [hasClaimedNFT]);
 
 // Now, we combine the memberAddresses and memberTokenAmounts into a single array
@@ -98,7 +101,8 @@ useEffect(() => {
     sdk.setProviderOrSigner(signer);
   }, [signer]);
 
-useEffect(async () => {
+useEffect(() => {
+  async function fetchData() {
   if(!address) {
       return;
   }
@@ -118,7 +122,8 @@ useEffect(async () => {
         setHasClaimedNFT(false);
         console.error("failed to nft balance", error);
       });
-  }, [address]);
+  } fetchData();
+}, [address]);
 
 //State variables for setting up 2 new proposals
 const [proposals, setProposals] = useState([]);
